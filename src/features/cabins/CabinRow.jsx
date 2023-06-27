@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { formatCurrency } from "../../utils/helpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabins";
 import { toast } from "react-hot-toast";
+import PropTypes from "prop-types";
+
+import { formatCurrency } from "../../utils/helpers";
+import { deleteCabin } from "../../services/apiCabins";
 
 const TableRow = styled.div`
   display: grid;
@@ -79,5 +81,16 @@ function CabinRow({ cabin }) {
     </TableRow>
   );
 }
+
+CabinRow.propTypes = {
+  cabin: PropTypes.shape({
+    name: PropTypes.string,
+    maxCapacity: PropTypes.number,
+    regularPrice: PropTypes.number,
+    discount: PropTypes.number,
+    image: PropTypes.string,
+    id: PropTypes.number,
+  }),
+};
 
 export default CabinRow;
