@@ -1,15 +1,15 @@
-import styled from "styled-components";
-
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCabin } from "../../services/apiCabins";
 import { toast } from "react-hot-toast";
+
+import { createCabin } from "../../services/apiCabins";
+
+import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
+import Input from "../../ui/Input";
+import Textarea from "../../ui/Textarea";
+import FileInput from "../../ui/FileInput";
+import Button from "../../ui/Button";
 
 function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
@@ -30,12 +30,11 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    mutate({ data, image: data.image.at(0) });
-    // reset();
-    // console.log(data);
+    mutate({ ...data, image: data.image[0] });
+    reset();
   }
   function onError(errors) {
-    // console.log(errors);
+    console.log(errors);
   }
 
   return (
