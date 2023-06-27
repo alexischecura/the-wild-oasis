@@ -37,7 +37,7 @@ export async function createEditCabin(newCabin, id) {
 
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be created");
+    throw new Error("Cabins could not be created or edited");
   }
 
   const { error: storageError } = await supabase.storage

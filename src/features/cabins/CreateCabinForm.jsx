@@ -7,27 +7,44 @@ import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
 import FileInput from "../../ui/FileInput";
 import Button from "../../ui/Button";
-import { useCreateEditCabin } from "./useCreateEditCabin";
+import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseForm }) {
+  const { createCabin, isCreating } = useCreateCabin();
+  const { editCabin, isEditing } = useEditCabin();
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
-
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
+  const isWorking = isCreating || isEditing;
   const { errors } = formState;
-
-  const { isWorking, createCabin, editCabin } = useCreateEditCabin();
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     if (isEditSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId });
-    else createCabin({ ...data, image });
-    reset();
+      editCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        {
+          onSuccess: () => {
+            onCloseForm();
+          },
+        }
+      );
+    else {
+      createCabin(
+        { ...data, image },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseForm();
+          },
+        }
+      );
+    }
   }
   function onError(errors) {
     console.log(errors);
@@ -135,6 +152,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
 CreateCabinForm.propTypes = {
   cabinToEdit: PropTypes.object,
+  onCloseForm: PropTypes.func,
 };
 
 export default CreateCabinForm;
