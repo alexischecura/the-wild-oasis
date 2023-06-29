@@ -1,14 +1,8 @@
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -65,7 +59,7 @@ function Modal({ children }) {
   const [openName, setOpenName] = useState("");
 
   const close = () => setOpenName("");
-  const open = (el) => setOpenName(el);
+  const open = setOpenName;
 
   return (
     <ModalContext.Provider value={{ openName, close, open }}>
@@ -84,25 +78,7 @@ function Open({ children, opens }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-
-  const ref = useRef();
-
-  useEffect(
-    function () {
-      function handleClick(e) {
-        console.log(e.target);
-        if (ref.current && !ref.current.contains(e.target)) {
-          // close();
-          console.log("closing");
-        }
-      }
-
-      document.addEventListener("click", handleClick);
-
-      return () => document.removeEventListener("click", handleClick);
-    },
-    [close]
-  );
+  const ref = useOutsideClick(close);
 
   if (name !== openName) return null;
 
