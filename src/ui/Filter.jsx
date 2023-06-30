@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import SortBy from "./SortBy";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
@@ -57,16 +56,6 @@ function Filter({ filterField, options }) {
           {option.label}
         </FilterButton>
       ))}
-      <SortBy
-        options={[
-          { value: "name-asc", label: "Sort by name (A-Z)" },
-          { value: "name-desc", label: "Sort by name (Z-A)" },
-          { value: "regularPrice-asc", label: "Sort by price (low first)" },
-          { value: "regularPrice-desc", label: "Sort by price (high first)" },
-          { value: "maxCapacity-asc", label: "Sort by capacity (low first)" },
-          { value: "maxCapacity-desc", label: "Sort by capacity (high first)" },
-        ]}
-      />
     </StyledFilter>
   );
 }
