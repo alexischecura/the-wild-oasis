@@ -23,38 +23,6 @@ const StyledSalesChart = styled(DashboardBox)`
   }
 `;
 
-const fakeData = [
-  { label: "Jan 09", total: 480, extraSales: 20 },
-  { label: "Jan 10", total: 580, extraSales: 100 },
-  { label: "Jan 11", total: 550, extraSales: 150 },
-  { label: "Jan 12", total: 600, extraSales: 50 },
-  { label: "Jan 13", total: 700, extraSales: 150 },
-  { label: "Jan 14", total: 800, extraSales: 150 },
-  { label: "Jan 15", total: 700, extraSales: 200 },
-  { label: "Jan 16", total: 650, extraSales: 200 },
-  { label: "Jan 17", total: 600, extraSales: 300 },
-  { label: "Jan 18", total: 550, extraSales: 100 },
-  { label: "Jan 19", total: 700, extraSales: 100 },
-  { label: "Jan 20", total: 800, extraSales: 200 },
-  { label: "Jan 21", total: 700, extraSales: 100 },
-  { label: "Jan 22", total: 810, extraSales: 50 },
-  { label: "Jan 23", total: 950, extraSales: 250 },
-  { label: "Jan 24", total: 970, extraSales: 100 },
-  { label: "Jan 25", total: 900, extraSales: 200 },
-  { label: "Jan 26", total: 950, extraSales: 300 },
-  { label: "Jan 27", total: 850, extraSales: 200 },
-  { label: "Jan 28", total: 900, extraSales: 100 },
-  { label: "Jan 29", total: 800, extraSales: 300 },
-  { label: "Jan 30", total: 950, extraSales: 200 },
-  { label: "Jan 31", total: 1100, extraSales: 300 },
-  { label: "Feb 01", total: 1200, extraSales: 400 },
-  { label: "Feb 02", total: 1250, extraSales: 300 },
-  { label: "Feb 03", total: 1400, extraSales: 450 },
-  { label: "Feb 04", total: 1500, extraSales: 500 },
-  { label: "Feb 05", total: 1400, extraSales: 600 },
-  { label: "Feb 06", total: 1450, extraSales: 400 },
-];
-
 function SalesChart({ bookings, numDays }) {
   const { isDarkMode } = useDarkMode();
 
